@@ -12,29 +12,15 @@ import Cocoa
 // Define a ViewController class that inherits from NSViewController
 class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
 
-    /* A boolean flag for enabling debug mode
-
-       IMPORTANT: set to false for production or users can inspect your web views.
-
-    */
-    static let debugMode = false
-
-    // Declare the first webpage to be loaded
-    var index: String = "index"
-    // Declare if external URLs should open in Safari
-    let openExternalURLsInBrowser = false;
-    // Declare a WKWebView property
     var webView: WKWebView!
-
-    // Custom initializer to override the default value if needed
-    init(index: String = "index") {
-       self.index = index
-       super.init(nibName: nil, bundle: nil)
-    }
 
     // Required initializer for decoding
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
     // Override the loadView() function to create and configure the WKWebView
@@ -48,8 +34,9 @@ class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
         webView.navigationDelegate = self
         webView.underPageBackgroundColor = .black
         webView.configuration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
+        
         if #available(macOS 13.3, iOS 16.4, tvOS 16.4, *) {
-            if (ViewController.debugMode == true) {
+            if Config.shared.debugMode {
                 webView.isInspectable = true
             }
         }
@@ -60,7 +47,7 @@ class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let url = URL(string: "https://example.com") {
+        if let url = Config.shared.url {
             let request = URLRequest(url: url)
             webView.load(request)
         }
@@ -87,7 +74,7 @@ class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
             return
         }
 
-        if openExternalURLsInBrowser && (url.scheme == "http" || url.scheme == "https") {
+        if Config.shared.openExternalURLsInBrowser && (url.scheme == "http" || url.scheme == "https") {
             decisionHandler(.cancel)
             NSWorkspace.shared.open(url)
         } else {
@@ -97,7 +84,7 @@ class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
 
     // This function evaluates javascript on the main webview
     func evaluateJavascript(javaScript: String) {
-        if (ViewController.debugMode == true) {
+        if Config.shared.debugMode {
             Logger.info("Evaluating Javascript (main):\n>_ \(javaScript)")
         }
         webView.evaluateJavaScript(javaScript, completionHandler: nil)
