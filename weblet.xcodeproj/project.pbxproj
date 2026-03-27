@@ -16,7 +16,7 @@
 
 /* Begin PBXFileReference section */
 		E213D2762E51519900EC4E73 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		E29E73C9214F464100334050 /* enClose-MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "enClose-MacOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E29E73C9214F464100334050 /* weblet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weblet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29E73CC214F464100334050 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E29E73CE214F464100334050 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E29E73D0214F464200334050 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -47,7 +47,7 @@
 		E29E73CA214F464100334050 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E29E73C9214F464100334050 /* enClose-MacOS.app */,
+				E29E73C9214F464100334050 /* weblet.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,9 +69,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E29E73C8214F464100334050 /* enClose-MacOS */ = {
+		E29E73C8214F464100334050 /* weblet */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E29E73D9214F464200334050 /* Build configuration list for PBXNativeTarget "enClose-MacOS" */;
+			buildConfigurationList = E29E73D9214F464200334050 /* Build configuration list for PBXNativeTarget "weblet" */;
 			buildPhases = (
 				E29E73C5214F464100334050 /* Sources */,
 				E29E73C6214F464100334050 /* Frameworks */,
@@ -81,9 +81,9 @@
 			);
 			dependencies = (
 			);
-			name = "enClose-MacOS";
+			name = weblet;
 			productName = "enClose-MacOS";
-			productReference = E29E73C9214F464100334050 /* enClose-MacOS.app */;
+			productReference = E29E73C9214F464100334050 /* weblet.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -94,7 +94,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					E29E73C8214F464100334050 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -107,7 +107,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E29E73C4214F464100334050 /* Build configuration list for PBXProject "enClose-MacOS" */;
+			buildConfigurationList = E29E73C4214F464100334050 /* Build configuration list for PBXProject "weblet" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -120,7 +120,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E29E73C8214F464100334050 /* enClose-MacOS */,
+				E29E73C8214F464100334050 /* weblet */,
 			);
 		};
 /* End PBXProject section */
@@ -200,6 +200,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7D4344PZ7V;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -221,6 +222,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -264,6 +266,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7D4344PZ7V;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -278,6 +281,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -288,20 +292,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "enClose-MacOS/enClose-MacOS.entitlements";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = "enClose-MacOS/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = enClose;
+				INFOPLIST_KEY_CFBundleDisplayName = weblet;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14;
-				MARKETING_VERSION = 2.6;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.enClose;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weblet.fellowgeek.enClose;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -313,20 +323,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "enClose-MacOS/enClose-MacOS.entitlements";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = "enClose-MacOS/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = enClose;
+				INFOPLIST_KEY_CFBundleDisplayName = weblet;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14;
-				MARKETING_VERSION = 2.6;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.enClose;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weblet.fellowgeek.enClose;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -336,7 +352,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E29E73C4214F464100334050 /* Build configuration list for PBXProject "enClose-MacOS" */ = {
+		E29E73C4214F464100334050 /* Build configuration list for PBXProject "weblet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E29E73D7214F464200334050 /* Debug */,
@@ -345,7 +361,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E29E73D9214F464200334050 /* Build configuration list for PBXNativeTarget "enClose-MacOS" */ = {
+		E29E73D9214F464200334050 /* Build configuration list for PBXNativeTarget "weblet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E29E73DA214F464200334050 /* Debug */,
