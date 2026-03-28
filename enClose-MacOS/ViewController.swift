@@ -82,6 +82,12 @@ class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
         }
     }
 
+    // Handle camera and microphone permissions
+    @available(macOS 12.0, *)
+    func webView(_ webView: WKWebView, decideMediaCapturePermissionsFor origin: WKSecurityOrigin, initiatedBy frame: WKFrameInfo, type: WKMediaCaptureType, decisionHandler: @escaping (WKPermissionDecision) -> Void) {
+        decisionHandler(.grant)
+    }
+
     // This function evaluates javascript on the main webview
     func evaluateJavascript(javaScript: String) {
         if Config.shared.debugMode {

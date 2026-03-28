@@ -1,6 +1,6 @@
 cask "weblet" do
-  version "1.0"
-  sha256 "d19ec3578874191c718bff79bf7788ebebb5a8a88baaa3ab52ddc1bed20bee96"
+  version "1.1"
+  sha256 "7766179d1e9d4c769d9ca53f9a219c8b239dfe4e8882fec53a5c6008c9a7fdf7"
 
   url "https://github.com/fellowgeek/weblet/releases/download/v#{version}/weblet.dmg"
   name "weblet"
