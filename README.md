@@ -2,6 +2,8 @@
 
 A lightweight macOS web view application that can be launched and configured via command-line arguments.
 
+![logo](docs/images/icon_256.png)
+
 ## Features
 
 - Custom URL loading
