@@ -32,9 +32,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             y = screenRect.origin.y + (screenRect.height - height) / 2
         }
         
-        let frame = NSRect(x: x, y: y, width: width, height: height)
-        window.setFrame(frame, display: true)
-        
         if config.borderless {
             window.styleMask.remove(.titled)
             window.styleMask.insert(.fullSizeContentView)
@@ -42,6 +39,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             window.titleVisibility = .hidden
             window.isMovableByWindowBackground = true
         }
+
+        let frame = NSRect(x: x, y: y, width: width, height: height)
+        window.setFrame(frame, display: true)
         
         if config.alwaysOnTop {
             window.level = .floating
