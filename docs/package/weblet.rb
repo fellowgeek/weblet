@@ -7,6 +7,7 @@ cask "weblet" do
   desc "A lightweight macOS web view application that can be launched and configured via command-line arguments."
   homepage "https://github.com/fellowgeek/weblet"
 
+  depends_on macos: ">= :sonoma"
   app "weblet.app"
 
   # Creates a shim script so 'weblet' works in the terminal
