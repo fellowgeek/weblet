@@ -20,7 +20,7 @@ cask "weblet" do
     File.write(wrapper_script, <<~SH)
       #!/bin/sh
       # Launch the app via macOS Launch Services to avoid terminal hang
-      exec open -a "#{appdir}/weblet.app" --args "$@"
+      exec open -n -a "#{appdir}/weblet.app" --args "$@"
     SH
 
     FileUtils.chmod("+x", wrapper_script)
