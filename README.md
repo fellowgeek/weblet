@@ -13,7 +13,15 @@ A lightweight macOS web view application that can be launched and configured via
 - Debug mode for web inspector access
 - Optional external URL handling (open http/https in Safari)
 
-## Installation & Usage
+## Installation
+
+To install `weblet` using Homebrew, execute the following command:
+
+```bash
+brew install fellowgeek/tap/weblet
+```
+
+## Usage
 
 To run `weblet`, execute the binary from the command line with optional flags.
 
