@@ -20,6 +20,8 @@ class Config {
     var windowY: CGFloat?
     var borderless: Bool = false
     var alwaysOnTop: Bool = false
+    var fullscreen: Bool = false
+    var resizable: Bool = false
 
     private init() {
         let arguments = CommandLine.arguments
@@ -67,6 +69,10 @@ class Config {
                 borderless = true
             case "--always-on-top":
                 alwaysOnTop = true
+            case "--fullscreen":
+                fullscreen = true
+            case "--resizable":
+                resizable = true
             default:
                 break
             }

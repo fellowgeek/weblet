@@ -61,7 +61,12 @@ To run `weblet`, execute the binary from the command line with optional flags.
 ./weblet --url https://wikipedia.org --open-external-urls-in-browser
 ```
 
-### 5. Launch with default settings (80% screen, centered, https://example.com)
+### 5. Launch in Fullscreen mode
+```bash
+./weblet --url https://vimeo.com --fullscreen
+```
+
+### 6. Launch with default settings (80% screen, centered, https://example.com)
 ```bash
 ./weblet
 ```

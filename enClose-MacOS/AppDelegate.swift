@@ -46,6 +46,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if config.alwaysOnTop {
             window.level = .floating
         }
+
+        if config.fullscreen {
+            window.toggleFullScreen(nil)
+        }
+        
+        if !config.resizable {
+            window.styleMask.remove(.resizable)
+        }
 	}
 
 	func applicationWillTerminate(_ aNotification: Notification) {
