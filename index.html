@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>weblet — Lightweight macOS Web Views via CLI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@300;400;500;700&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#38200d",
+                        "on-secondary": "#555500",
+                        "tertiary-fixed": "#ff946f",
+                        "inverse-on-surface": "#68503f",
+                        "on-tertiary-container": "#2b0700",
+                        "background": "#1a0a02",
+                        "inverse-surface": "#fff8f5",
+                        "error-dim": "#d7383b",
+                        "inverse-primary": "#ac3600",
+                        "primary-fixed-dim": "#fe5e1e",
+                        "surface-container-highest": "#38200d",
+                        "on-primary-fixed-variant": "#551600",
+                        "outline-variant": "#5a4333",
+                        "on-background": "#ffdfcb",
+                        "secondary": "#eaea00",
+                        "on-secondary-container": "#ffff60",
+                        "on-error-container": "#ffa8a3",
+                        "on-surface": "#ffdfcb",
+                        "surface-container-high": "#301a09",
+                        "tertiary-container": "#fe5e1e",
+                        "primary-container": "#ff7948",
+                        "on-primary-fixed": "#000000",
+                        "primary-fixed": "#ff7948",
+                        "surface-tint": "#ff9069",
+                        "tertiary-fixed-dim": "#ff7e4f",
+                        "on-tertiary-fixed": "#330a00",
+                        "on-secondary-fixed": "#424200",
+                        "primary": "#ff9069",
+                        "on-tertiary": "#451000",
+                        "on-surface-variant": "#c4a590",
+                        "surface-dim": "#1a0a02",
+                        "on-primary": "#591800",
+                        "secondary-fixed-dim": "#dbdb00",
+                        "surface-bright": "#402611",
+                        "secondary-fixed": "#eaea00",
+                        "surface-container-low": "#200f03",
+                        "primary-dim": "#ff7441",
+                        "surface": "#1a0a02",
+                        "error": "#ff716c",
+                        "surface-container": "#281506",
+                        "on-secondary-fixed-variant": "#5f5f00",
+                        "tertiary-dim": "#ff7441",
+                        "on-error": "#490006",
+                        "tertiary": "#ff7948",
+                        "surface-container-lowest": "#000000",
+                        "outline": "#8b705d",
+                        "secondary-dim": "#dbdb00",
+                        "on-tertiary-fixed-variant": "#6c1f00",
+                        "secondary-container": "#626200",
+                        "on-primary-container": "#451000",
+                        "error-container": "#9f0519"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .terminal-grid {
+            background-image: radial-gradient(#38200d 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .glow-primary {
+            box-shadow: 0 0 20px rgba(255, 144, 105, 0.2);
+        }
+        .glow-secondary {
+            box-shadow: 0 0 15px rgba(234, 234, 0, 0.15);
+        }
+        .logo {
+            border-radius: 15px;
+        }
+    </style>
+    <script>
+        function copyToClipboard() {
+            const command = document.getElementById('brew-command').innerText;
+            navigator.clipboard.writeText(command).then(() => {
+                const button = event.currentTarget;
+                const icon = button.querySelector('.material-symbols-outlined');
+                const originalIcon = icon.innerText;
+                icon.innerText = 'check';
+                button.classList.add('text-secondary');
+                setTimeout(() => {
+                    icon.innerText = originalIcon;
+                    button.classList.remove('text-secondary');
+                }, 2000);
+            });
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#1a0a02]/60 backdrop-blur-xl">
+<div class="flex justify-between items-center px-8 h-16 w-full max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-[#ff9069] uppercase font-headline"><img alt="weblet logo" class="w-auto h-16 glow-primary logo" src="docs/images/icon_256.png"/></div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-[#c4a590] hover:text-[#ff9069] font-headline tracking-tight transition-colors duration-200" href="#features">Features</a>
+<a class="text-[#c4a590] hover:text-[#ff9069] font-headline tracking-tight transition-colors duration-200" href="https://github.com/fellowgeek/weblet/blob/main/README.md">Docs</a>
+<a class="text-[#c4a590] hover:text-[#ff9069] font-headline tracking-tight transition-colors duration-200" href="#examples">Examples</a>
+</div>
+<div class="flex items-center gap-4">
+<a href="#deploy-locally" class="bg-primary-fixed-dim text-on-primary-fixed block px-4 py-2 text-sm font-bold font-headline uppercase tracking-tighter hover:shadow-[0_0_12px_#ff9069] transition-all rounded-sm flex items-center">
+                    Install Now
+                </a>
+</div>
+</div>
+</nav>
+<main class="pt-16 terminal-grid">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex flex-col items-center justify-center px-6 overflow-hidden">
+<div class="max-w-4xl text-center z-10 mb-16"><div class="flex items-center justify-center gap-2 mb-8 opacity-80">
+<img alt="weblet logo" class="h-6 w-auto logo" src="docs/images/icon_256.png"/>
+<span class="font-mono text-xs uppercase tracking-[0.3em] text-primary">Powered by weblet</span>
+</div>
+<h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-[0.9] text-on-surface">
+                    Lightweight macOS Web Views <br/> <span class="text-secondary">via CLI</span>
+</h1>
+<p class="font-body text-on-surface-variant text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Instantly turn any URL into a standalone, hardware-accelerated macOS window. Engineered for developers who live in the terminal.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a href="#deploy-locally" class="bg-primary px-8 py-4 font-headline font-bold text-on-primary-fixed uppercase tracking-widest hover:glow-primary transition-all flex items-center justify-center">Get Started</a>
+<a href="https://github.com/fellowgeek/weblet" class="border border-outline-variant/30 px-8 py-4 font-headline font-bold text-primary uppercase tracking-widest hover:bg-surface-container transition-all flex items-center justify-center">View on GitHub</a>
+</div>
+</div>
+<!-- Terminal Mockup -->
+<div class="relative w-full max-w-5xl mx-auto group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 blur-2xl opacity-50"></div>
+<div class="relative bg-surface-container-lowest border border-outline-variant/20 rounded-lg overflow-hidden shadow-2xl">
+<!-- Window Controls -->
+<div class="bg-surface-container-high px-4 py-3 flex items-center justify-between">
+<div class="flex space-x-2">
+<div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+<div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+</div>
+<div class="text-xs font-mono text-outline uppercase tracking-widest">weblet — zsh — 80x24</div>
+<div class="w-12"></div>
+</div>
+<!-- Terminal Content -->
+<div class="p-8 font-mono text-sm md:text-base leading-relaxed">
+<div class="flex gap-3">
+<span class="text-secondary">➜</span>
+<span class="text-on-surface">weblet --url https://github.com --float --borderless</span>
+</div>
+<div class="mt-4 text-on-surface-variant animate-pulse">
+                            [info] Initializing WebKit process...<br/>
+                            [success] Window spawned: PID 48291<br/>
+                            [status] URL Loaded: github.com
+                        </div>
+<!-- Blinking Cursor -->
+<div class="mt-4 flex items-center gap-1">
+<span class="text-secondary">➜</span>
+<div class="w-2.5 h-5 bg-secondary animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Grid -->
+<section id="features" class="py-24 px-8 max-w-[1440px] mx-auto">
+<div class="flex flex-col md:flex-row gap-12 items-start mb-16">
+<div class="md:w-1/3">
+<h2 class="font-headline text-4xl font-bold tracking-tight text-primary leading-none uppercase">Core<br/>Precision</h2>
+<div class="w-12 h-1 bg-secondary mt-6"></div>
+</div>
+<div class="md:w-2/3">
+<p class="text-on-surface-variant text-xl leading-relaxed">Built with the efficiency of Swift and the flexibility of CLI, weblet provides unparalleled control over your web environments.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-1">
+<!-- Feature 1 -->
+<div class="bg-surface-container-low p-10 group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">link</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-4 uppercase">Custom URL</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Launch any internal or external URL with zero configuration overhead.</p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container-low p-10 group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">aspect_ratio</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-4 uppercase">Borderless</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Minimalist chrome-free windows for a distraction-free development experience.</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container-low p-10 group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">layers</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-4 uppercase">Always on Top</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Pin your documentation or dashboards above all other windows.</p>
+</div>
+<!-- Feature 4 -->
+<div class="bg-surface-container-low p-10 group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">fullscreen</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-4 uppercase">Fullscreen</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Toggle immersive mode instantly via CLI flags or keyboard shortcuts.</p>
+</div>
+<!-- Feature 5 -->
+<div class="bg-surface-container-low p-10 group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">bug_report</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-4 uppercase">Debug Mode</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Integrated Web Inspector and console output for real-time troubleshooting.</p>
+</div>
+<!-- Feature 6 (Coming Soon / Extra) -->
+<div class="bg-surface-container-low p-10 group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">location_searching</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-4 uppercase">Precise Positioning</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Engineered for pixel-perfect window placement.</p>
+</div>
+</div>
+</section>
+<!-- Installation Block -->
+<section id="deploy-locally" class="py-24 bg-surface-container-lowest">
+<div class="max-w-4xl mx-auto px-8 text-center">
+<h2 class="font-headline text-3xl font-bold text-on-surface mb-8 uppercase tracking-tight">Deploy Locally</h2>
+<div class="relative group">
+<div class="absolute -inset-0.5 bg-secondary/20 blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
+<div class="relative flex items-center bg-surface-container p-6 border-l-4 border-secondary">
+<code id="brew-command" class="font-mono text-secondary text-lg flex-1 text-left select-all">brew install fellowgeek/tap/weblet</code>
+<button onclick="copyToClipboard()" class="text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+</div>
+</div>
+<p class="mt-6 text-xs font-mono text-outline uppercase tracking-widest">v1.0.4 - Optimized for Apple Silicon</p>
+</div>
+</section>
+<!-- Usage Examples -->
+<section id="examples" class="py-24 px-8 max-w-[1440px] mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+<div class="space-y-12">
+<h2 class="font-headline text-4xl font-bold text-on-surface uppercase leading-[0.85]">Engineered<br/>Syntax</h2>
+<div class="space-y-8">
+<div>
+<h4 class="font-headline font-bold text-primary text-sm uppercase mb-2 tracking-widest">Example 01</h4>
+<p class="text-on-surface-variant mb-4">Launch a floating dashboard with custom dimensions.</p>
+<div class="bg-surface-container-lowest p-4 font-mono text-sm border-l-2 border-outline-variant">
+<span class="text-primary">weblet</span> <span class="text-secondary">--url</span> <span class="text-on-surface">"https://stats.local"</span> <span class="text-secondary">--width</span> <span class="text-on-surface">400</span> <span class="text-secondary">--height</span> <span class="text-on-surface">800</span>
+</div>
+</div>
+<div>
+<h4 class="font-headline font-bold text-primary text-sm uppercase mb-2 tracking-widest">Example 02</h4>
+<p class="text-on-surface-variant mb-4">Run as a borderless kiosk for internal tool displays.</p>
+<div class="bg-surface-container-lowest p-4 font-mono text-sm border-l-2 border-outline-variant">
+<span class="text-primary">weblet</span> <span class="text-secondary">--url</span> <span class="text-on-surface">"https://ci.dev"</span> <span class="text-secondary">--borderless</span> <span class="text-secondary">--fullscreen</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-10 group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">location_searching</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-4 uppercase">Precise Positioning</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Engineered for pixel-perfect window placement.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 border-t-[15%] border-[#5a4333]/15 bg-[#000000]">
+<div class="w-full flex flex-col items-center gap-6 px-8 max-w-[1440px] mx-auto">
+<div class="text-[#eaea00] font-mono text-xl tracking-tighter"><div class="flex flex-col items-center gap-2">
+<img alt="weblet logo" class="w-auto mb-2 h-20 logo" src="docs/images/icon_256.png"/>
+</div></div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-[#c4a590] hover:text-[#eaea00] font-['Inter'] text-xs uppercase tracking-widest transition-all duration-300" href="https://github.com/fellowgeek/weblet/releases">Changelog</a>
+<a class="text-[#c4a590] hover:text-[#eaea00] font-['Inter'] text-xs uppercase tracking-widest transition-all duration-300 text-[#ff9069]" href="https://github.com/fellowgeek/weblet/tree/main">GitHub</a>
+</div>
+<div class="text-[#c4a590] font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-center opacity-50">
+                © 2024 The Engineering Editorial. All rights reserved. Built for macOS.
+            </div>
+</div>
+</footer>
+</body></html>
