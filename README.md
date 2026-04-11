@@ -10,6 +10,8 @@ A lightweight macOS web view application that can be launched and configured via
 - Adjustable window dimensions and positioning
 - Borderless mode with draggable background
 - "Always on top" window level
+- Fullscreen mode
+- Resizable window support
 - Debug mode for web inspector access
 - Optional external URL handling (open http/https in Safari)
 
@@ -38,6 +40,8 @@ To run `weblet`, execute the binary from the command line with optional flags.
 | `--window-y <value>` | Centered | Window origin Y (top-left coordinate system). |
 | `--borderless` | `off` | Remove title bar and window chrome (draggable). |
 | `--always-on-top` | `off` | Keep the window floating above all other windows. |
+| `--fullscreen` | `off` | Launch the application in fullscreen mode. |
+| `--resizable` | `off` | Allow the window to be resized by the user. |
 
 ## Example Usage
 
@@ -66,7 +70,12 @@ To run `weblet`, execute the binary from the command line with optional flags.
 ./weblet --url https://vimeo.com --fullscreen
 ```
 
-### 6. Launch with default settings (80% screen, centered, https://example.com)
+### 6. Launch with a resizable window
+```bash
+./weblet --url https://github.com --resizable
+```
+
+### 7. Launch with default settings (80% screen, centered, https://example.com)
 ```bash
 ./weblet
 ```
