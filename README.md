@@ -5,7 +5,6 @@ A lightweight macOS web view application that can be launched and configured via
 ![logo](docs/images/icon_256.png)
 
 ## Features
-
 - Custom URL loading
 - Adjustable window dimensions and positioning
 - Borderless mode with draggable background
@@ -79,3 +78,4 @@ To run `weblet`, execute the binary from the command line with optional flags.
 ```bash
 ./weblet
 ```
+
